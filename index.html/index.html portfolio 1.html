@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yugendran | Portfolio</title>
+  <style>
+    :root {
+      --bg: #050816;
+      --card: #0b1120;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.35);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --heading: #a855f7;
+      --shadow-neon: 0 0 15px rgba(56, 189, 248, 0.7);
+      --radius: 14px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0f172a 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.9),
+        rgba(15, 23, 42, 0.6),
+        transparent
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .nav {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-left {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-shadow: 0 0 9px rgba(56, 189, 248, 0.75);
+      line-height: 1.1;
+    }
+
+    .nav-left span {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-shadow: none;
+      margin-top: 2px;
+    }
+
+    .nav-links a {
+      margin-left: 1.2rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #38bdf8, #a855f7);
+      box-shadow: var(--shadow-neon);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Sections */
+    .section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 1.2rem;
+    }
+
+    /* Hero */
+    #home {
+      padding-top: 3.1rem;
+      padding-bottom: 3.1rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 4vw, 2.9rem);
+      font-weight: 800;
+      color: var(--accent);
+      text-shadow: 0 0 14px rgba(56, 189, 248, 0.9);
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 1rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      background: radial-gradient(
+        circle at top,
+        rgba(56, 189, 248, 0.32),
+        rgba(15, 23, 42, 0.96)
+      );
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #e0f2fe;
+    }
+
+    .hero-tag span {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+      margin-right: 8px;
+    }
+
+    /* Section titles */
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+      color: var(--heading);
+      text-shadow: 0 0 13px rgba(168, 85, 247, 0.9);
+    }
+
+    .section-text {
+      color: var(--text-muted);
+      max-width: 640px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.4rem;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .pill {
+      position: relative;
+      padding: 0.6rem 0.9rem;
+      border-radius: 999px;
+      background: radial-gradient(
+        circle at top left,
+        rgba(56, 189, 248, 0.22),
+        rgba(15, 23, 42, 0.95)
+      );
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      box-shadow: var(--shadow-neon);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .pill::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at 0 0,
+        rgba(248, 250, 252, 0.25),
+        transparent 55%
+      );
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(248, 250, 252, 0.8);
+      margin-right: 6px;
+      box-shadow: 0 0 7px rgba(248, 250, 252, 0.75);
+    }
+
+    /* Project cards */
+    .projects-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .card {
+      background: radial-gradient(
+        circle at top,
+        rgba(168, 85, 247, 0.13),
+        rgba(15, 23, 42, 0.95)
+      );
+      border-radius: var(--radius);
+      padding: 0.95rem 1.1rem;
+      border: 1px solid rgba(168, 85, 247, 0.65);
+      box-shadow: 0 0 18px rgba(168, 85, 247, 0.7);
+      text-align: center;
+      font-size: 0.95rem;
+      color: #e5e7eb;
+      transition: transform 0.18s ease, box-shadow 0.18s ease,
+        border-color 0.18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 26px rgba(56, 189, 248, 0.9);
+      border-color: rgba(56, 189, 248, 0.9);
+      cursor: pointer;
+    }
+
+    /* Contact */
+    .contact-list {
+      list-style: none;
+      margin-top: 0.7rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-list li {
+      margin-bottom: 0.5rem;
+      color: var(--text-muted);
+    }
+
+    .link {
+      color: #38bdf8;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(30, 64, 175, 0.7);
+      padding: 1rem 0;
+      margin-top: 1.5rem;
+      background: radial-gradient(circle at bottom, #0b1120, #020617 55%);
+    }
+
+    .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.2rem;
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.8rem;
+    }
+
+    @media (min-width: 720px) {
+      .hero-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1.35fr);
+        column-gap: 2.1rem;
+        align-items: center;
+      }
+
+      .hero-badge {
+        justify-self: flex-end;
+        width: 220px;
+        height: 220px;
+        border-radius: 999px;
+        border: 1px solid rgba(56, 189, 248, 0.7);
+        background: radial-gradient(
+          circle at center,
+          rgba(56, 189, 248, 0.33),
+          rgba(15, 23, 42, 0.98)
+        );
+        box-shadow: 0 0 32px rgba(56, 189, 248, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .hero-badge-inner {
+        padding: 1.1rem 1.3rem;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 23, 42, 0.7);
+        background: radial-gradient(
+          circle at top,
+          rgba(15, 23, 42, 0.9),
+          rgba(2, 6, 23, 0.98)
+        );
+        font-size: 0.85rem;
+        color: #e5e7eb;
+        line-height: 1.6;
+      }
+
+      .hero-badge-inner span {
+        display: block;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: #a5b4fc;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="nav">
+      <div class="nav-left">
+        Yugendran
+        <span>Portfolio</span>
+      </div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="section">
+    <div class="hero-layout">
+      <div>
+        <div class="hero-tag">
+          <span></span>
+          B.Tech Artificial Intelligence &amp; Data Science
+        </div>
+        <h1 class="hero-title">Hello, I'm Yugendran</h1>
+        <p class="hero-subtitle">
+          B.Tech Artificial Intelligence and Data Science student at KCG
+          College of Technology, interested in building clean web
+          experiences and exploring intelligent systems.
+        </p>
+      </div>
+
+      <!-- Round badge on right for desktop -->
+      <div class="hero-badge" aria-hidden="true">
+        <div class="hero-badge-inner">
+          <span>Student</span>
+          KCG College of Technology<br />
+          Artificial Intelligence &amp;<br />
+          Data Science
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <h2 class="section-title">About Me</h2>
+    <p class="section-text">
+      Passionate about learning modern web technologies and AI concepts, and
+      strengthening problem‑solving skills by building small projects and
+      experimenting with code.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <h2 class="section-title">Skills</h2>
+    <p class="section-text">
+      Familiar with core web development technologies and programming
+      languages, and constantly improving by building hands‑on projects.
+    </p>
+
+    <div class="skills-grid">
+      <div class="pill"><span class="pill-dot"></span>HTML</div>
+      <div class="pill"><span class="pill-dot"></span>CSS</div>
+      <div class="pill"><span class="pill-dot"></span>JavaScript (Basics)</div>
+      <div class="pill"><span class="pill-dot"></span>React (Beginner)</div>
+      <div class="pill"><span class="pill-dot"></span>Python (Basics)</div>
+      <div class="pill"><span class="pill-dot"></span>Git &amp; GitHub</div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <h2 class="section-title">Projects</h2>
+    <p class="section-text">
+      Simple mini‑projects built while learning web development and
+      JavaScript fundamentals.
+    </p>
+
+    <div class="projects-grid">
+      <div class="card">Todo App</div>
+      <div class="card">Counter App</div>
+      <div class="card">Show / Hide Text</div>
+      <div class="card">Display Text App</div>
+      <div class="card">Login UI</div>
+      <div class="card">Theme Toggle</div>
+      <div class="card">Button Colour Changer</div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-text">
+      Feel free to reach out for internships, collaborations, or project
+      ideas related to web development or AI.
+    </p>
+
+    <ul class="contact-list">
+      <li>Email: <a class="link" href="mailto:yugedass@gmail.com">yugedass@gmail.com</a></li>
+      <li>
+        GitHub:
+        <a class="link" href="https://github.com/yugendran-007" target="_blank"
+          >github.com/yugendran-007</a
+        >
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      © 2025 Yugendran
+    </div>
+  </footer>
+</body>
+</html>
